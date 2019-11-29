@@ -27,6 +27,7 @@ def vim_lcov_highlight_uncovered_lines(lcov_filepath):
     # NOTE: sign id must be number > 0 and uniq in some group
     sign_id_start = 1
     group = 'vim-lcov_' + vim.current.buffer.name
+    priority = 9999  # NOTE: default value is 10
     for sign_id, line_number in enumerate(
         lcov_parser.uncovered_line_numbers_generator(
             lcov_filepath, os.path.basename(vim.current.buffer.name)), start=sign_id_start):
@@ -36,6 +37,7 @@ def vim_lcov_highlight_uncovered_lines(lcov_filepath):
             ' line=' +
             str(line_number) +
             ' group=' + group +
+            ' priority=' + str(priority) +
             ' name=vim_lcov_uncovered file=".expand("%:p")')
         create_fold_if_needed(last_line_number, line_number - 1)
         last_line_number = line_number
