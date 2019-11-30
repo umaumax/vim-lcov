@@ -16,8 +16,10 @@ if !exists("g:vim_lcov_marker_fold")
   let g:vim_lcov_marker_fold = 1
 endif
 
-highlight VimLcovCoveredLineSignText   ctermbg=Red ctermfg=Black guibg=#EA0000 guifg=Black
-highlight VimLcovUncoveredLineSignText ctermbg=Red ctermfg=Black guibg=#EA0000 guifg=Black
+" green on black
+highlight VimLcovCoveredLineSignText   ctermbg=232 ctermfg=82  guibg=232 guifg=82
+" red on black
+highlight VimLcovUncoveredLineSignText ctermbg=232 ctermfg=197 guibg=232 guifg=197
 
 " NOTE
 " linehl can also be specified when defining a sign to highlight entire line,
