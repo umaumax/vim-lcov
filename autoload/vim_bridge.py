@@ -2,6 +2,7 @@
 
 import vim
 import os
+
 import lcov_parser
 
 
@@ -12,8 +13,9 @@ def vim_lcov_highlight_uncovered_lines(lcov_filepath):
         start_line = last_line_number + 1
         end_line = line_number
         if start_line > eof_line_number or end_line > eof_line_number:
-            print(
-                "[vim-lcov][WARN] no such line range {}~{}".format(start_line, end_line))
+            log = "[vim-lcov][WARN]: no such line range {}~{}".format(
+                start_line, end_line)
+            vim.command('echohl ErrorMsg | echo "' + log + '" | echohl None')
             return False
         if end_line > start_line + 1:
             vim.command(':' + str(start_line) +
@@ -21,7 +23,8 @@ def vim_lcov_highlight_uncovered_lines(lcov_filepath):
         return True
 
     if not os.path.isfile(lcov_filepath):
-        print("[vim-lcov][ERROR] no such file {}".format(lcov_filepath))
+        log = "[vim-lcov][ERROR]: no such file {}".format(lcov_filepath)
+        vim.command('echohl ErrorMsg | echo "' + log + '" | echohl None')
         return False
     last_line_number = 0
     # NOTE: sign id must be number > 0 and uniq in some group

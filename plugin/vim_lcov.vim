@@ -1,3 +1,8 @@
+if !has('python3')
+    echo "[vim-lcov][ERROR]: Required vim compiled with +python3"
+    finish
+endif
+
 if exists('g:loaded_vim_lcov')
     finish
 endif
