@@ -32,7 +32,7 @@ execute 'python import sys; sys.path += ["' . s:this_plugin_directory . '"]'
 pyfile <sfile>:p:h/lcov_parser.py
 pyfile <sfile>:p:h/vim_bridge.py
 
-function vim_lcov#lcov_uncovered_visible(lcov_filepath)
+function! vim_lcov#lcov_uncovered_visible(lcov_filepath)
   python vim_lcov_highlight_uncovered_lines(vim.eval('a:lcov_filepath'))
 endfunction
 
