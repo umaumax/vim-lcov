@@ -28,12 +28,12 @@ execute 'sign define vim_lcov_covered text='.g:vim_lcov_marker_covered  .' texth
 execute 'sign define vim_lcov_uncovered text='.g:vim_lcov_marker_uncovered.' texthl=VimLcovUncoveredLineSignText'
 
 let s:this_plugin_directory = escape(expand('<sfile>:p:h'), '\"')
-execute 'python import sys; sys.path += ["' . s:this_plugin_directory . '"]'
-pyfile <sfile>:p:h/lcov_parser.py
-pyfile <sfile>:p:h/vim_bridge.py
+execute 'python3 import sys; sys.path += ["' . s:this_plugin_directory . '"]'
+py3file <sfile>:p:h/vim_bridge.py
+py3file <sfile>:p:h/lcov_parser.py
 
 function! vim_lcov#lcov_uncovered_visible(lcov_filepath)
-  python vim_lcov_highlight_uncovered_lines(vim.eval('a:lcov_filepath'))
+  python3 vim_lcov_highlight_uncovered_lines(vim.eval('a:lcov_filepath'))
 endfunction
 
 let &cpo = s:save_cpo
