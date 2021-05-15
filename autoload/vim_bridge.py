@@ -30,6 +30,13 @@ def vim_lcov_highlight_uncovered_lines(lcov_filepath):
     # NOTE: sign id must be number > 0 and uniq in some group
     sign_id_start = 1
     group = 'vim-lcov_' + vim.current.buffer.name
+    # remove all previous signs if exist
+    vim.command(
+        'exe ":sign unplace * group=' +
+        group +
+        ' file=".expand("%:p")')
+    # unfold all
+    vim.command(':silent! %foldopen!')
     priority = 9999  # NOTE: default value is 10
     for sign_id, line_number in enumerate(
         lcov_parser.uncovered_line_numbers_generator(
