@@ -1,6 +1,6 @@
 # vim-lcov
 
-vim plugin to show uncovered coverage lins by lcov info file
+vim plugin to show uncovered coverage lines by lcov info file
 
 ## requires
 * python3
