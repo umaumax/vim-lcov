@@ -16,10 +16,14 @@ if !exists("g:vim_lcov_marker_fold")
   let g:vim_lcov_marker_fold = 1
 endif
 
-" green on black
-highlight VimLcovCoveredLineSignText   ctermbg=232 ctermfg=82  guibg=232 guifg=82
-" red on black
-highlight VimLcovUncoveredLineSignText ctermbg=232 ctermfg=197 guibg=232 guifg=197
+if !hlexists('VimLcovCoveredLineSignText')
+  " green on black
+  highlight VimLcovCoveredLineSignText   ctermbg=232 ctermfg=82  guibg=232 guifg=82
+endif
+if !hlexists('VimLcovUncoveredLineSignText')
+  " red on black
+  highlight VimLcovUncoveredLineSignText ctermbg=232 ctermfg=197 guibg=232 guifg=197
+endif
 
 " NOTE
 " linehl can also be specified when defining a sign to highlight entire line,
@@ -33,6 +37,7 @@ py3file <sfile>:p:h/vim_bridge.py
 py3file <sfile>:p:h/lcov_parser.py
 
 function! vim_lcov#lcov_uncovered_visible(lcov_filepath)
+  setlocal foldmethod=manual
   python3 vim_lcov_highlight_uncovered_lines(vim.eval('a:lcov_filepath'))
 endfunction
 
